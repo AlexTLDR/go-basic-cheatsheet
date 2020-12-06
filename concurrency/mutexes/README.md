@@ -1,0 +1,1 @@
+main.go is an example of data race, where all the goroutines run simultaneously and the final value of n varies and it is not 0 all the time. In mutex.go, the code has been refactored so n is correctly incremented from 0 to 100 and then decremented from 100 to 0.
