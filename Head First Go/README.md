@@ -1,0 +1,1 @@
+My notes on Head First Go by Jay McGavren -> https://headfirstgo.com/
