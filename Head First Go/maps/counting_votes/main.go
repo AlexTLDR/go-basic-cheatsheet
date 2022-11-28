@@ -11,5 +11,10 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(lines)
+	//fmt.Println(lines)
+	counts := make(map[string]int)
+	for _, line := range lines {
+		counts[line]++
+	}
+	fmt.Println(counts)
 }
