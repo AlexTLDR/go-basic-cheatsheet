@@ -19,3 +19,6 @@ func main() {
 	}
 	fmt.Printf("Average: %0.2f\n", sum/float64(len(arguments)))
 }
+
+// add the arguments after the go run command
+// go run main.go 99.2 86.4
