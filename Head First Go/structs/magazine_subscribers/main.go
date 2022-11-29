@@ -9,7 +9,12 @@ type subscriber struct {
 }
 
 func main() {
+	subscriber1 := defaultSubscriber("Alex")
+	subscriber1.rate = 0.99
+	printInfo(subscriber1)
 
+	subscriber2 := defaultSubscriber("Cami")
+	printInfo(subscriber2)
 }
 
 func defaultSubscriber(name string) subscriber {
