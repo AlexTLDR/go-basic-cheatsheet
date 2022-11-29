@@ -16,20 +16,31 @@ func main() {
 	subscriber2 := defaultSubscriber("Cami")
 	printInfo(subscriber2)
 
+	subscriber3 := defaultSubscriber("Oreo")
+	printInfo(subscriber3)
+	applyDiscount(subscriber3)
+	printInfo(subscriber3)
+
 	var s subscriber
 	applyDiscount(&s)
 	fmt.Println(s.rate)
 }
 
-func defaultSubscriber(name string) subscriber {
+/* Using pointers for code optimization. Without pointers, functions receive a copy f the arguments they are called with.
+That's why it's often a good idea to pass functions a pointer to a struct as structs are usually big values */
+
+// func defaultSubscriber(name string) subscriber {
+func defaultSubscriber(name string) *subscriber {
 	var s subscriber
 	s.name = name
 	s.rate = 5.99
 	s.active = true
-	return s
+	//return s
+	return &s
 }
 
-func printInfo(s subscriber) {
+// func printInfo(s subscriber) {
+func printInfo(s *subscriber) {
 	fmt.Println("Name:", s.name)
 	fmt.Println("Monthly rate:", s.rate)
 	fmt.Println("Active?:", s.active)
