@@ -3,14 +3,30 @@ package main
 import "fmt"
 
 type subscriber struct {
-	name   string
-	rate   float64
-	active bool
+	name        string
+	rate        float64
+	active      bool
+	homeAddress address
+}
+
+type staff struct {
+	name        string
+	salary      float64
+	homeAddress address
+}
+
+type address struct {
+	street     string
+	city       string
+	state      string
+	postalCode string
 }
 
 func main() {
+	postalAddress := address{street: "Test St", city: "Stuttgart", state: "BW", postalCode: "123456"}
 	subscriber1 := defaultSubscriber("Alex")
 	subscriber1.rate = 0.99
+	subscriber1.homeAddress = postalAddress
 	printInfo(subscriber1)
 
 	subscriber2 := defaultSubscriber("Cami")
@@ -24,6 +40,12 @@ func main() {
 	var s subscriber
 	applyDiscount(&s)
 	fmt.Println(s.rate)
+
+	var employee staff
+	employee.name = "John Doe"
+	employee.salary = 100000
+	fmt.Println(employee.name)
+	fmt.Println(employee.salary)
 }
 
 /* Using pointers for code optimization. Without pointers, functions receive a copy f the arguments they are called with.
@@ -44,6 +66,7 @@ func printInfo(s *subscriber) {
 	fmt.Println("Name:", s.name)
 	fmt.Println("Monthly rate:", s.rate)
 	fmt.Println("Active?:", s.active)
+	fmt.Println("Home Address:", s.homeAddress)
 }
 
 // Using pointers to modify a struct\
