@@ -22,6 +22,12 @@ type address struct {
 	postalCode string
 }
 
+type staffAnonymous struct {
+	name   string
+	salary float64
+	address
+}
+
 func main() {
 	//create a postallAddress struct and use it to populate subscriber 1 and used anonymized the address field.
 	// because of the anonymization, the field is no longer called as subscriber1.homeAddress = postalAddress
@@ -59,6 +65,25 @@ func main() {
 	fmt.Println("State:", employee.homeAddress.state)
 	fmt.Println("Postal code:", employee.homeAddress.postalCode)
 	// if I have used anonymization in the staff struct, the call would be like employee.address.street
+	// even better, because of using anonymization, we can access the fields as embeded structs:
+
+	// employee.homeAddress.street becomes employee.street
+
+	var worker staffAnonymous
+	worker.name = "John Doe Anonymous"
+	worker.salary = 900000
+	// setting the fields of the inner struct through the outer struct
+	worker.street = "Stuifenstr Anonymous"
+	worker.city = "Ulm Anonymous"
+	worker.state = "BW Anonymous"
+	worker.postalCode = "6543210 Anonymous"
+	fmt.Println("Employee name:", worker.name)
+	fmt.Println("Salary:", worker.salary)
+	// accessing the fields
+	fmt.Println("Street:", worker.street)
+	fmt.Println("City:", worker.city)
+	fmt.Println("State:", worker.state)
+	fmt.Println("Postal code:", worker.postalCode)
 }
 
 /* Using pointers for code optimization. Without pointers, functions receive a copy f the arguments they are called with.
@@ -79,7 +104,7 @@ func printInfo(s *subscriber) {
 	fmt.Println("Name:", s.name)
 	fmt.Println("Monthly rate:", s.rate)
 	fmt.Println("Active?:", s.active)
-	fmt.Println("Home Address:", s.homeAddress)
+	fmt.Println("Home Address:", s.address)
 }
 
 // Using pointers to modify a struct\
