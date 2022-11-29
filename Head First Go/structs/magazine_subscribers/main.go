@@ -3,10 +3,10 @@ package main
 import "fmt"
 
 type subscriber struct {
-	name        string
-	rate        float64
-	active      bool
-	homeAddress address
+	name   string
+	rate   float64
+	active bool
+	address
 }
 
 type staff struct {
@@ -23,11 +23,12 @@ type address struct {
 }
 
 func main() {
-	//create a postallAddress struct and use it to populate subscriber 1
+	//create a postallAddress struct and use it to populate subscriber 1 and used anonymized the address field.
+	// because of the anonymization, the field is no longer called as subscriber1.homeAddress = postalAddress
 	postalAddress := address{street: "Test St", city: "Stuttgart", state: "BW", postalCode: "123456"}
 	subscriber1 := defaultSubscriber("Alex")
 	subscriber1.rate = 0.99
-	subscriber1.homeAddress = postalAddress
+	subscriber1.address = postalAddress
 	printInfo(subscriber1)
 
 	subscriber2 := defaultSubscriber("Cami")
@@ -57,6 +58,7 @@ func main() {
 	fmt.Println("City:", employee.homeAddress.city)
 	fmt.Println("State:", employee.homeAddress.state)
 	fmt.Println("Postal code:", employee.homeAddress.postalCode)
+	// if I have used anonymization in the staff struct, the call would be like employee.address.street
 }
 
 /* Using pointers for code optimization. Without pointers, functions receive a copy f the arguments they are called with.
