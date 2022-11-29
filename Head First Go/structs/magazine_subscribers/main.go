@@ -23,6 +23,7 @@ type address struct {
 }
 
 func main() {
+	//create a postallAddress struct and use it to populate subscriber 1
 	postalAddress := address{street: "Test St", city: "Stuttgart", state: "BW", postalCode: "123456"}
 	subscriber1 := defaultSubscriber("Alex")
 	subscriber1.rate = 0.99
@@ -44,8 +45,18 @@ func main() {
 	var employee staff
 	employee.name = "John Doe"
 	employee.salary = 100000
-	fmt.Println(employee.name)
-	fmt.Println(employee.salary)
+	// setting the fields of the inner struct through the outer struct
+	employee.homeAddress.street = "Stuifenstr"
+	employee.homeAddress.city = "Ulm"
+	employee.homeAddress.state = "BW"
+	employee.homeAddress.postalCode = "6543210"
+	fmt.Println("Employee name:", employee.name)
+	fmt.Println("Salary:", employee.salary)
+	// accessing the fields
+	fmt.Println("Street:", employee.homeAddress.street)
+	fmt.Println("City:", employee.homeAddress.city)
+	fmt.Println("State:", employee.homeAddress.state)
+	fmt.Println("Postal code:", employee.homeAddress.postalCode)
 }
 
 /* Using pointers for code optimization. Without pointers, functions receive a copy f the arguments they are called with.
