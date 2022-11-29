@@ -15,6 +15,10 @@ func main() {
 
 	subscriber2 := defaultSubscriber("Cami")
 	printInfo(subscriber2)
+
+	var s subscriber
+	applyDiscount(&s)
+	fmt.Println(s.rate)
 }
 
 func defaultSubscriber(name string) subscriber {
@@ -29,4 +33,9 @@ func printInfo(s subscriber) {
 	fmt.Println("Name:", s.name)
 	fmt.Println("Monthly rate:", s.rate)
 	fmt.Println("Active?:", s.active)
+}
+
+// Using pointers to modify a struct\
+func applyDiscount(s *subscriber) {
+	s.rate = 4.99
 }
