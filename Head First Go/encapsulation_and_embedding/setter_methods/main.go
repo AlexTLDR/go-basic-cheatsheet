@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"log"
+)
 
 type Date struct {
 	Year  int
@@ -10,10 +14,28 @@ type Date struct {
 
 func main() {
 	date := Date{}
-	date.SetYear(2019)
+	err := date.SetYear(2022)
+	if err != nil {
+		log.Fatal(err)
+	}
+	date.SetMonth(12)
+	date.SetDay(1)
+
 	fmt.Println(date)
 }
 
-func (d Date) SetYear(year int) {
+func (d *Date) SetYear(year int) error {
+	if year < 1 {
+		return errors.New("invalid year")
+	}
 	d.Year = year
+	return nil
+}
+
+func (d *Date) SetMonth(month int) {
+	d.Month = month
+}
+
+func (d *Date) SetDay(day int) {
+	d.Day = day
 }
