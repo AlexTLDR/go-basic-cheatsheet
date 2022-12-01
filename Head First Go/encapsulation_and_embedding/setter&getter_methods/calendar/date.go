@@ -31,3 +31,19 @@ func (d *Date) SetDay(day int) error {
 	d.day = day
 	return nil
 }
+
+// Getter Methods
+/* Getter methods don't need to modify the receiver at all, so a direct Date value as a receiver can be used.
+But if any method on a type takes a pointer receiver, convention says, that they all should, for consistency's sake.*/
+
+func (d *Date) Year() int {
+	return d.year
+}
+
+func (d *Date) Month() int {
+	return d.month
+}
+
+func (d *Date) Day() int {
+	return d.day
+}

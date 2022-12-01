@@ -21,4 +21,10 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(date)
+
+	// Printing of the Getter Methods
+
+	fmt.Println(date.Year())
+	fmt.Println(date.Month())
+	fmt.Println(date.Day())
 }
