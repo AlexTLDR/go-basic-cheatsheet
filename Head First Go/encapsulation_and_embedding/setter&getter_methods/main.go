@@ -49,4 +49,12 @@ func main() {
 	fmt.Println(event.Date.Month())
 	fmt.Println(event.Day())
 
+	// Encapsulating the Event Title field
+
+	err = event.SetTitle("My b-day")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(event.Title())
+
 }
