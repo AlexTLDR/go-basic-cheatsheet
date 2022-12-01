@@ -18,9 +18,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	date.SetMonth(12)
-	date.SetDay(1)
-
+	err = date.SetMonth(12)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = date.SetDay(1)
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println(date)
 }
 
@@ -32,10 +37,18 @@ func (d *Date) SetYear(year int) error {
 	return nil
 }
 
-func (d *Date) SetMonth(month int) {
+func (d *Date) SetMonth(month int) error {
+	if month < 1 || month > 12 {
+		return errors.New("invalid month")
+	}
 	d.Month = month
+	return nil
 }
 
-func (d *Date) SetDay(day int) {
+func (d *Date) SetDay(day int) error {
+	if day < 1 || day > 31 {
+		return errors.New("invalid month")
+	}
 	d.Day = day
+	return nil
 }
