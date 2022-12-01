@@ -30,6 +30,7 @@ type NoiseMaker interface {
 
 func play(n NoiseMaker) {
 	n.MakeSound()
+	// n.Walk() - will return an error as a method from the concrete type that isn't defined in the interface, can't be called
 }
 func main() {
 	play(Robot("Lego"))
