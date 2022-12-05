@@ -16,6 +16,7 @@ func main() {
 	player = cassette.TapeRecorder{}
 	playList(player, mixTape)
 	TryOut(cassette.TapeRecorder{})
+
 }
 
 func playList(device Player, songs []string) {
@@ -30,5 +31,6 @@ func playList(device Player, songs []string) {
 func TryOut(player Player) {
 	player.Play("Test Track")
 	player.Stop()
-	player.Record()
+	recorder := player.(cassette.TapeRecorder)
+	recorder.Record()
 }
