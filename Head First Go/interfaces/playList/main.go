@@ -29,6 +29,9 @@ func main() {
 	} else {
 		fmt.Println("Player was not a TapeRecorder")
 	}
+
+	//fixing the TryOut function
+	TryOut(cassette.TapePlayer{})
 }
 
 func playList(device Player, songs []string) {
@@ -43,6 +46,12 @@ func playList(device Player, songs []string) {
 func TryOut(player Player) {
 	player.Play("Test Track")
 	player.Stop()
-	recorder := player.(cassette.TapeRecorder)
-	recorder.Record()
+	//fixing the TryOut function
+	recorder, ok := player.(cassette.TapeRecorder)
+	if ok {
+		recorder.Record()
+	} else {
+		fmt.Println("Player was not a TapeRecorder from the TryOut function")
+	}
+
 }
