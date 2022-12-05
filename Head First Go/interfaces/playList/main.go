@@ -10,8 +10,10 @@ type Player interface {
 }
 
 func main() {
-	player := cassette.TapePlayer{}
+	var player Player = cassette.TapePlayer{}
 	mixTape := []string{"Viktor and his demons", "Mosca Cojonera", "Chop suey"}
+	playList(player, mixTape)
+	player = cassette.TapeRecorder{}
 	playList(player, mixTape)
 }
 
