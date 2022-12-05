@@ -15,6 +15,7 @@ func main() {
 	playList(player, mixTape)
 	player = cassette.TapeRecorder{}
 	playList(player, mixTape)
+	TryOut(cassette.TapeRecorder{})
 }
 
 func playList(device Player, songs []string) {
@@ -22,4 +23,12 @@ func playList(device Player, songs []string) {
 		device.Play(song)
 	}
 	device.Stop()
+}
+
+// Type assertion
+
+func TryOut(player Player) {
+	player.Play("Test Track")
+	player.Stop()
+	player.Record()
 }
