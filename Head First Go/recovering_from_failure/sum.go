@@ -24,6 +24,8 @@ func GetFloats(fileName string) ([]float64, error) {
 	if err != nil {
 		return nil, err
 	}
+	// with defer we get sure that even if we encounter an error, CloseFile is called
+	defer CloseFile(file)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -33,7 +35,7 @@ func GetFloats(fileName string) ([]float64, error) {
 		}
 		numbers = append(numbers, number)
 	}
-	CloseFile(file)
+
 	if scanner.Err() != nil {
 		return nil, scanner.Err()
 	}
