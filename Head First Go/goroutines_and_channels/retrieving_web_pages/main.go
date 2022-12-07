@@ -5,33 +5,39 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"time"
 )
 
 func main() {
 	//go retrieveWebPage("https://example.com")
-	go responseSize("https://example.com")
-	go responseSize("https://google.com")
-	go responseSize("https://github.com")
-	go responseSize("https://gsp.ro")
-	time.Sleep(5 * time.Second)
+
+	sizes := make(chan int)
+
+	go responseSize("https://example.com", sizes)
+	go responseSize("https://google.com", sizes)
+	go responseSize("https://github.com", sizes)
+	go responseSize("https://gsp.ro", sizes)
+
+	fmt.Println(<-sizes)
+	fmt.Println(<-sizes)
+	fmt.Println(<-sizes)
+	fmt.Println(<-sizes)
 }
 
-func retrieveWebPage(url string) {
-	fmt.Println("Displaying", url)
-	response, err := http.Get(url)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer response.Body.Close()
-	body, err := io.ReadAll(response.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(string(body))
-}
+// func retrieveWebPage(url string) {
+// 	fmt.Println("Displaying", url)
+// 	response, err := http.Get(url)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer response.Body.Close()
+// 	body, err := io.ReadAll(response.Body)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	fmt.Println(string(body))
+// }
 
-func responseSize(url string) {
+func responseSize(url string, channel chan int) {
 	fmt.Println("Getting", url)
 	response, err := http.Get(url)
 	if err != nil {
@@ -42,5 +48,5 @@ func responseSize(url string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(len(body))
+	channel <- len(body)
 }
