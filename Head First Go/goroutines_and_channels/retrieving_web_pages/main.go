@@ -7,10 +7,15 @@ import (
 	"net/http"
 )
 
+type Page struct {
+	URL  string
+	Size int
+}
+
 func main() {
 	//go retrieveWebPage("https://example.com")
 
-	sizes := make(chan int)
+	pages := make(chan Page)
 	/* replacing the repetitive code with the for statements below
 
 	go responseSize("https://example.com", sizes)
@@ -27,11 +32,12 @@ func main() {
 	urls := []string{"https://example.com", "https://google.com", "https://github.com", "https://gsp.ro"}
 
 	for _, url := range urls {
-		go responseSize(url, sizes)
+		go responseSize(url, pages)
 	}
 
 	for i := 0; i < len(urls); i++ {
-		fmt.Println(<-sizes)
+		page := <-pages
+		fmt.Printf("%s: %d\n", page.URL, page.Size)
 	}
 
 }
@@ -50,7 +56,7 @@ func main() {
 // 	fmt.Println(string(body))
 // }
 
-func responseSize(url string, channel chan int) {
+func responseSize(url string, channel chan Page) {
 	fmt.Println("Getting", url)
 	response, err := http.Get(url)
 	if err != nil {
@@ -61,5 +67,5 @@ func responseSize(url string, channel chan int) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	channel <- len(body)
+	channel <- Page{URL: url, Size: len(body)}
 }
