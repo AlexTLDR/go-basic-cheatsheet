@@ -11,6 +11,7 @@ func main() {
 	//go retrieveWebPage("https://example.com")
 
 	sizes := make(chan int)
+	/* replacing the repetitive code with the for statements below
 
 	go responseSize("https://example.com", sizes)
 	go responseSize("https://google.com", sizes)
@@ -21,6 +22,18 @@ func main() {
 	fmt.Println(<-sizes)
 	fmt.Println(<-sizes)
 	fmt.Println(<-sizes)
+	*/
+
+	urls := []string{"https://example.com", "https://google.com", "https://github.com", "https://gsp.ro"}
+
+	for _, url := range urls {
+		go responseSize(url, sizes)
+	}
+
+	for i := 0; i < len(urls); i++ {
+		fmt.Println(<-sizes)
+	}
+
 }
 
 // func retrieveWebPage(url string) {
