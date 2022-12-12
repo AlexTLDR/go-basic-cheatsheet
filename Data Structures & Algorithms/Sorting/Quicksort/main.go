@@ -18,8 +18,8 @@ func quickSort(list []int) []int {
 		return list
 	}
 	less, greater := 0, len(list)-1
-	//pivot := rand.Int() % len(list)
-	pivot := 0
+	pivot := rand.Int() % len(list)
+	//pivot := 0
 	list[pivot], list[greater] = list[greater], list[pivot]
 
 	for i := range list {
