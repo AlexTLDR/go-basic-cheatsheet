@@ -9,8 +9,16 @@ func main() {
 	fmt.Println(greeting)
 }
 
+type language string
+
 // greet returns a greeting to the world.
-func greet() string {
-	// return a simple greeting message
-	return "Hello world"
+func greet(l language) string {
+	switch l {
+	case "en":
+		return "Hello world"
+	case "fr":
+		return "Bonjour le monde"
+	default:
+		return ""
+	}
 }
