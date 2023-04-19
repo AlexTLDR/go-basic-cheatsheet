@@ -8,38 +8,58 @@ func ExampleMain() {
 	// Hello world
 }
 
-func TestGreet_English(t *testing.T) {
-	lang := "en"
-	expectedGreeting := "Hello world"
-
-	greeting := greet(language(lang))
-
-	if greeting != expectedGreeting {
-		// mark this test as failed
-		t.Errorf("expected: %q, got: %q", expectedGreeting, greeting)
+func TestGreet(t *testing.T) {
+	type testCase struct {
+		lang             language
+		expectedGreeting string
 	}
-}
 
-func TestGreet_French(t *testing.T) {
-	lang := "fr"
-	expectedGreeting := "Bonjour le monde"
-
-	greeting := greet(language(lang))
-
-	if greeting != expectedGreeting {
-		// mark this test as failed
-		t.Errorf("expected: %q, got: %q", expectedGreeting, greeting)
+	tests := map[string]testCase{
+		"English": {
+			lang:             "en",
+			expectedGreeting: "Hello world",
+		},
+		"French": {
+			lang:             "fr",
+			expectedGreeting: "Bonjour le monde",
+		},
+		"Akkadian, not supported": {
+			lang:             "akk",
+			expectedGreeting: `unsupported language: "akk"`,
+		},
+		"Greek": {
+			lang:             "el",
+			expectedGreeting: "Χαίρετε Κόσμε",
+		},
+		"Hebrew": {
+			lang:             "he",
+			expectedGreeting: "שלום עולם",
+		},
+		"Urdu": {
+			lang:             "ur",
+			expectedGreeting: "ہیلو دنیا",
+		},
+		"Vietnamese": {
+			lang:             "vi",
+			expectedGreeting: "Xin chào Thế Giới",
+		},
+		"Romanian": {
+			lang:             "ro",
+			expectedGreeting: "Salut lume",
+		},
+		"Empty": {
+			lang:             "",
+			expectedGreeting: `unsupported language: ""`,
+		},
 	}
-}
 
-func TestGreet_Romanian(t *testing.T) {
-	lang := "ro"
-	expectedGreeting := ""
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			greeting := greet(tc.lang)
 
-	greeting := greet(language(lang))
-
-	if greeting != expectedGreeting {
-		// mark this test as failed
-		t.Errorf("expected: %q, got: %q", expectedGreeting, greeting)
+			if greeting != tc.expectedGreeting {
+				t.Errorf("expected: %q, got: %q", tc.expectedGreeting, greeting)
+			}
+		})
 	}
 }
