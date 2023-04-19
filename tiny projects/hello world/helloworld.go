@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	greeting := greet()
+	greeting := greet("en")
 	fmt.Println(greeting)
 }
 
