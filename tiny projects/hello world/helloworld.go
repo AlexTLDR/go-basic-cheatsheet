@@ -1,3 +1,6 @@
+// run the program by adding the flag
+// go run helloworld.go -lang=el
+
 package main
 
 import (
@@ -6,7 +9,7 @@ import (
 )
 
 func main() {
-	lang := ""
+	var lang string
 	flag.StringVar(&lang, "lang", "ro", "The required language, e.g. en, ro...")
 	flag.Parse()
 
