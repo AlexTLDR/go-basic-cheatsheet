@@ -1,7 +1,3 @@
-A handy cheat sheet for my personal use.
-
-My vscode settings json:
-
 {
     "go.buildOnSave": "off",
     "go.lintOnSave": "workspace",
