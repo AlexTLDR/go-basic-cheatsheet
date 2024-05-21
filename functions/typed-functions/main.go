@@ -15,11 +15,13 @@ func Uppercase(s string) string {
 	return strings.ToUpper(s)
 }
 
-func Prefixer(s string) string {
-	return "FOO_" + s
+func Prefixer(prefix string) TransformFunc {
+	return func(s string) string {
+		return prefix + s
+	}
 }
 
 func main() {
 	fmt.Println(transformStrings("hello world!", Uppercase))
-	fmt.Println(transformStrings("hello world!", Prefixer))
+	fmt.Println(transformStrings("hello world!", Prefixer("Preixed with Prefixer func -> ")))
 }
