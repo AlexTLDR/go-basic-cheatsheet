@@ -1,12 +1,18 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
 type Shape interface {
 	Area() float64
+}
+
+type Measurable interface {
+	Perimeter() float64
+}
+
+type Geometry interface {
+	Shape
+	Measurable
 }
 
 type Rectangle struct {
@@ -14,25 +20,21 @@ type Rectangle struct {
 	Height float64
 }
 
-type Circle struct {
-	Radius float64
-}
-
 func (r Rectangle) Area() float64 {
 	return r.Width * r.Height
 }
 
-func (c Circle) Area() float64 {
-	return math.Pi * c.Radius * c.Radius
+func (r Rectangle) Perimeter() float64 {
+	return 2 * (r.Width + r.Height)
 }
 
-func calculateArea(s Shape) float64 {
-	return s.Area()
+func describeShape(g Geometry) {
+	fmt.Println("Area:", g.Area())
+	fmt.Println("Perimeter:", g.Perimeter())
+
 }
+
 func main() {
 	rect := Rectangle{Width: 5, Height: 4}
-	circle := Circle{Radius: 2}
-
-	fmt.Println("Rectangle area:", calculateArea(rect))
-	fmt.Println("Circle area:", calculateArea(circle))
+	describeShape(rect)
 }
